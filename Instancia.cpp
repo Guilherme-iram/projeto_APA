@@ -19,6 +19,7 @@ void leitor_de_instancias(
     
     if (arquivo.is_open())
     {
+        int tempo;
         arquivo >> n_linhas_ref >> n_produtos_ref;
 
         // lendo array de produtos
@@ -33,7 +34,7 @@ void leitor_de_instancias(
         for (int i = 0; i < n_produtos_ref; i++) {
             std::vector<int> linha;
             for (int j = 0; j < n_produtos_ref; j++) {
-                int tempo;
+                
                 arquivo >> tempo;
                 linha.push_back(tempo);
             }

@@ -20,6 +20,12 @@ Solution construcao(Instancia instancia)
     int rand_index;
     int rand_produto;
 
+    
+    int size_produtos;
+    int melhor_custo;
+    int tamanho_linha_de_producao;
+
+
     for (i = 0; i < instancia.n_linhas; i++)
     {
         rand_index = rand() % (instancia.n_produtos - 1);
@@ -28,14 +34,16 @@ Solution construcao(Instancia instancia)
 
         linhas_de_producao.push_back({instancia.custo_producao[rand_produto - 1], {rand_produto}});
     }
-
-    for (i = 0; i < produtos_id.size(); i++)
+    
+   
+    // Tomar cuidado com o make_tuple: complexidade O(n)
+    for (i = 0; i < produtos_id.size() ; i++)
     {
-        int melhor_custo = 999;
-        std::tuple<int, int> melhor_posicao(0, 0);
+        melhor_custo = 999;
+        std::tuple<int, int> melhor_posicao(0,0);
         for (j = 0; j < linhas_de_producao.size(); j++)
         {
-            int size_produtos = linhas_de_producao[j].produtos.size();
+            size_produtos = linhas_de_producao[j].produtos.size();
 
             // Compara se o custo de produção do produto atual é menor que o custo de produção do produto na posição 0 da linha de producao j
             if (instancia.tempo_preparo[produtos_id[i] - 1][linhas_de_producao[j].produtos[0] - 1] < melhor_custo)
@@ -60,7 +68,9 @@ Solution construcao(Instancia instancia)
     for (i = 0; i < linhas_de_producao.size(); i++)
     {
         cout << "Linha " << i << ": ";
-        for (j = 0; j < linhas_de_producao[i].produtos.size(); j++)
+        tamanho_linha_de_producao = linhas_de_producao[i].produtos.size();
+
+        for (j = 0; j < tamanho_linha_de_producao ; j++)
         {
             cout << linhas_de_producao[i].produtos[j] << " ";
         }

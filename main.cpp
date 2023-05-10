@@ -10,7 +10,10 @@ using namespace std;
 
 int main()
 {
+    //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
+    
     string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\instancia_1.txt";
+    //string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/instancia_1.txt";
     
     int n_linhas, n_produtos;
     vector<int> produtos;
