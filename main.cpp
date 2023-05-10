@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <chrono>
+
 #include "Instancia.cpp"
 #include "Solution.cpp"
 #include "Construcao.cpp"
@@ -25,20 +27,49 @@ int main()
     Instancia instancia = {n_linhas, n_produtos, produtos, custo_produtos, tempo_preparo};
     
     // print all products ids
+    auto start = std::chrono::high_resolution_clock::now();
 
-    Solution solution = construcao(instancia);
+    Solution solution;
 
-    // Linha_producao linha_1 = {0, {1, 6, 5}};
-    // Linha_producao linha_2 = {0, {4, 3, 2}};
+    construcao(solution, instancia);
+    Solution best_solution = Solution(solution); // construcao(instancia);
 
-    // vector<Linha_producao> linhas = {linha_1, linha_2};
-    // Solution solution = Solution(linhas, 999, instancia);
-    // Solution solution = Construction(instancia);
-
-    int custo_total = solution.custo_total();
-
-    cout << "Custo total: " << custo_total << endl;
     
+    for (int i = 0; i < 21; i++){
+        
+        construcao(solution, instancia);
+
+        if (solution.custo_total() < best_solution.custo_total()){
+        
+            best_solution = Solution(solution);
+
+            cout << "------------------" << endl;
+            cout << "Iteracao: " << i << endl;
+            cout << "Nova Melhor solucao: " << endl;
+            cout << "Custo: " << best_solution.custo_total() << endl;
+            cout << "------------------" << endl;
+        }
+
+        if (i % 10 == 0){
+            cout << "------------------" << endl;
+            cout << "Iteracao: " << i << endl;
+            cout << "------------------" << endl;
+        }
+        
+    }
+    
+    auto end = std::chrono::high_resolution_clock::now();
+
+    // Cálculo do tempo de execução em segundos
+    std::chrono::duration<double> elapsed_seconds = end - start;
+
+    // Impressão do tempo de execução em segundos
+    cout << "------------------" << endl;
+    cout << "Melhor solucao: " << endl;
+    cout << "Custo: " << best_solution.custo_total() << endl;
+    best_solution.print_solution();
+    std::cout << "Tempo de execução: " << elapsed_seconds.count() << " segundos\n";
+
     return 0;
 }
 

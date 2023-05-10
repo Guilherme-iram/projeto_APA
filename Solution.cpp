@@ -10,6 +10,30 @@ Solution::Solution(std::vector<Linha_producao> linhas, int tempo_total, Instanci
     this->instancia = instancia;
 }
 
+Solution::Solution(std::vector<Linha_producao> Linhas, Instancia instancia){
+    this->linhas_producao = Linhas;
+    this->instancia = instancia;
+    this->tempo_total = Linhas[0].custo;
+
+    // Temporario
+    for (int i = 1; i < Linhas.size(); i++){
+        if (Linhas[i].custo > this->tempo_total){
+            this->tempo_total = Linhas[i].custo;
+        }
+    }
+}
+
+Solution::Solution(const Solution& s){
+    this->linhas_producao = s.linhas_producao;
+    this->tempo_total = s.tempo_total;
+    this->instancia = s.instancia;
+}
+
+Solution::Solution(){
+
+}
+
+
 void Solution::custo_linhas(){
     int custo_linha;
     int len_linha;
@@ -36,7 +60,18 @@ int Solution::custo_total(){
             
             custo_maximo = linhas_producao[i].custo;
         }
-        // std::cout << "Custo da linha " << i + 1 << ": " << linhas_producao[i].custo << std::endl;
     }
     return custo_maximo;
+}
+
+void Solution::print_solution(){
+
+    std::cout << "Tempo total: " << this->custo_total() << std::endl;
+    for (int i = 0; i < this->linhas_producao.size(); i++){
+        std::cout << "Linha " << i + 1 << ": ";
+        for (int j = 0; j < this->linhas_producao[i].produtos.size(); j++){
+            std::cout << this->linhas_producao[i].produtos[j] << " ";
+        }
+        std::cout << std::endl;
+    }
 }
