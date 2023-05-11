@@ -14,10 +14,10 @@ int main()
 {
     //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
     
-    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\instancia_1.txt";
+    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\instancia_custom_2.txt";
     //string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/instancia_1.txt";
     
-    int n_linhas, n_produtos;
+    unsigned int n_linhas, n_produtos;
     vector<int> produtos;
     vector<int> custo_produtos;
     vector<vector<int>> tempo_preparo;
@@ -69,7 +69,8 @@ int main()
     cout << "Custo: " << best_solution.custo_total() << endl;
     best_solution.print_solution();
     std::cout << "Tempo de execução: " << elapsed_seconds.count() << " segundos\n";
-
+    std::cout << "FIM DO PROGRAMA" << std::endl;
+    cout << "------------------" << endl;
     return 0;
 }
 

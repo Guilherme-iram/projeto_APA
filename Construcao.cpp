@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void construcao(Solution& s, Instancia instancia)
+void construcao(Solution& s, const Instancia& instancia)
 {
 
     static unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
@@ -15,10 +15,9 @@ void construcao(Solution& s, Instancia instancia)
     srand(seed);
 
     vector<int> produtos_id(instancia.produtos);
-
     vector<Linha_producao> linhas_de_producao = {};
     
-    int i, j;
+    unsigned int i, j;
     int rand_index;
     int rand_produto;
 
@@ -42,7 +41,7 @@ void construcao(Solution& s, Instancia instancia)
         int melhor_posicao[] = {0, 0};
 
 
-        for (j = 0; j < linhas_de_producao.size(); j++)
+        for (j = 0; j < instancia.n_linhas; j++)
         {
             size_produtos = linhas_de_producao[j].produtos.size();
 

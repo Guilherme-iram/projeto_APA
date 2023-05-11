@@ -8,8 +8,8 @@
 
 void leitor_de_instancias(
     std::string nome_arquivo,
-    int& n_linhas_ref,
-    int& n_produtos_ref,
+    unsigned int& n_linhas_ref,
+    unsigned int& n_produtos_ref,
     std::vector<int>& produtos_id_ref,
     std::vector<int>& produtos_custo_ref,
     std::vector<std::vector<int>>& tempo_preparo_ref) {
@@ -23,7 +23,7 @@ void leitor_de_instancias(
         arquivo >> n_linhas_ref >> n_produtos_ref;
 
         // lendo array de produtos
-        for (int i = 0; i < n_produtos_ref; i++) {
+        for (unsigned int i = 0; i < n_produtos_ref; i++) {
             int produto;
             arquivo >> produto;
             produtos_custo_ref.push_back(produto);
@@ -31,9 +31,9 @@ void leitor_de_instancias(
         }
         
         // lendo matriz de tempo de preparo
-        for (int i = 0; i < n_produtos_ref; i++) {
+        for (unsigned int i = 0; i < n_produtos_ref; i++) {
             std::vector<int> linha;
-            for (int j = 0; j < n_produtos_ref; j++) {
+            for (unsigned int j = 0; j < n_produtos_ref; j++) {
                 
                 arquivo >> tempo;
                 linha.push_back(tempo);
