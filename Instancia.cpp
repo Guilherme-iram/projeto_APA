@@ -6,42 +6,46 @@
 #include <fstream>
 
 
-void leitor_de_instancias(
-    std::string nome_arquivo,
-    unsigned int& n_linhas_ref,
-    unsigned int& n_produtos_ref,
-    std::vector<int>& produtos_id_ref,
-    std::vector<int>& produtos_custo_ref,
-    std::vector<std::vector<int>>& tempo_preparo_ref) {
+Instancia leitor_de_instancias(std::string nome_arquivo) {
     
+    unsigned int n_linhas;
+    unsigned int n_produtos;
+    std::vector<int> produtos_id;
+    std::vector<int> produtos_custo;
+    std::vector<std::vector<int>> tempo_preparo;
     std::string linha;
     std::ifstream arquivo(nome_arquivo);
     
     if (arquivo.is_open())
     {
         int tempo;
-        arquivo >> n_linhas_ref >> n_produtos_ref;
+        arquivo >> n_linhas >> n_produtos;
 
         // lendo array de produtos
-        for (unsigned int i = 0; i < n_produtos_ref; i++) {
+        for (unsigned int i = 0; i < n_produtos; i++) {
             int produto;
             arquivo >> produto;
-            produtos_custo_ref.push_back(produto);
-            produtos_id_ref.push_back(i + 1);
+            produtos_custo.push_back(produto);
+            produtos_id.push_back(i + 1);
         }
         
         // lendo matriz de tempo de preparo
-        for (unsigned int i = 0; i < n_produtos_ref; i++) {
+        for (unsigned int i = 0; i < n_produtos; i++) {
             std::vector<int> linha;
-            for (unsigned int j = 0; j < n_produtos_ref; j++) {
+            for (unsigned int j = 0; j < n_produtos; j++) {
                 
                 arquivo >> tempo;
                 linha.push_back(tempo);
             }
-            tempo_preparo_ref.push_back(linha);
+            tempo_preparo.push_back(linha);
         }
         arquivo.close();
+        return {n_linhas, n_produtos, produtos_id, produtos_custo, tempo_preparo};
+        
     } else {
+    
         std::cout << "Unable to open file";
+        return {0, 0, produtos_id, produtos_custo, tempo_preparo};
+
     }
 }

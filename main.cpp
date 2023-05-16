@@ -14,30 +14,30 @@ int main()
 {
     //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
     
-    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\instancia_custom_2.txt";
+    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\instancia_custom_4_20.txt";
     //string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/instancia_1.txt";
     
-    unsigned int n_linhas, n_produtos;
-    vector<int> produtos;
-    vector<int> custo_produtos;
-    vector<vector<int>> tempo_preparo;
-    
-    leitor_de_instancias(caminho_arquivo, n_linhas, n_produtos, produtos, custo_produtos, tempo_preparo);
-    
-    Instancia instancia = {n_linhas, n_produtos, produtos, custo_produtos, tempo_preparo};
-    
+    Instancia instancia = leitor_de_instancias(caminho_arquivo);
+
     // print all products ids
     auto start = std::chrono::high_resolution_clock::now();
 
     Solution solution;
+    Algoritmo algoritmo;
 
-    construcao(solution, instancia);
-    Solution best_solution = Solution(solution); // construcao(instancia);
+    solution = algoritmo.construcao(instancia);
+    Solution best_solution = Solution(solution); 
 
-    
-    for (int i = 0; i < 21; i++){
+    // print solucao inicial
+    cout << "------------------" << endl;
+    cout << "Solucao inicial: " << endl;
+    cout << "Custo: " << solution.custo_total() << endl;
+    solution.print_solution();
+    cout << "------------------" << endl;
+
+    for (int i = 0; i < 51; i++){
         
-        construcao(solution, instancia);
+        solution = algoritmo.construcao(instancia);
 
         if (solution.custo_total() < best_solution.custo_total()){
         
