@@ -14,8 +14,8 @@ int main()
 {
     //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
     
-    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\instancia_custom_4_20.txt";
-    //string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/instancia_1.txt";
+    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n450m16_A.txt";
+    //string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/n450m16_A.txt";
     
     Instancia instancia = leitor_de_instancias(caminho_arquivo);
 
@@ -35,7 +35,7 @@ int main()
     solution.print_solution();
     cout << "------------------" << endl;
 
-    for (int i = 0; i < 51; i++){
+    for (int i = 0; i < 10000; i++){
         
         solution = algoritmo.construcao(instancia);
 
