@@ -59,23 +59,40 @@ int main()
         
     }
     
+
+
+    // Impressão do tempo de execução em segundos
+    int custo_antigo = best_solution.custo_total();
+
+    cout << "------------------" << endl;
+    cout << "Melhor solucao: " << endl;
+    cout << "Custo: " << best_solution.custo_total() << endl;
+    best_solution.print_solution();
+    
+    cout << "------------------" << endl;
+
+    int custo_atual = best_solution.custo_total();
+
+
+    SwapIntra swp = SwapIntra(instancia);
+    
+    while (1)
+    {
+        custo_atual = best_solution.custo_total();
+        swp.run(best_solution);
+        custo_atual = custo_atual - best_solution.custo_total();
+        if (custo_atual == 0)
+        {
+            break;
+        }
+    }
+        
     auto end = std::chrono::high_resolution_clock::now();
 
     // Cálculo do tempo de execução em segundos
     std::chrono::duration<double> elapsed_seconds = end - start;
 
-    // Impressão do tempo de execução em segundos
-    cout << "------------------" << endl;
-    cout << "Melhor solucao: " << endl;
-    cout << "Custo: " << best_solution.custo_total() << endl;
-    best_solution.print_solution();
-    std::cout << "Tempo de execução: " << elapsed_seconds.count() << " segundos\n";
-    cout << "------------------" << endl;
-
-    SwapIntra swp = SwapIntra(instancia);
-
-    swp.run(best_solution);
-
+    int custo_novo = best_solution.custo_total();
     cout << "------------------" << endl;
     cout << "Melhor solucao APOS SWAP: " << endl;
     cout << "Custo: " << best_solution.custo_total() << endl;
@@ -84,6 +101,8 @@ int main()
     std::cout << "FIM DO PROGRAMA" << std::endl;
     cout << "------------------" << endl;
     
+    cout << "Delta custo: " << custo_novo - custo_antigo << endl;
+    std::cout << "Tempo de execução: " << elapsed_seconds.count() << " segundos\n";
 
     return 0;
 }

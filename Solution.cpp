@@ -57,13 +57,13 @@ int Solution::custo_total(){
     
     int custo_maximo = this->linhas_producao[0].custo;
     int soma_custos = 0;
-    for (unsigned int i = 1; i < this->linhas_producao.size(); i++){
+    for (unsigned int i = 0; i < this->linhas_producao.size(); i++){
         if (linhas_producao[i].custo > custo_maximo){           
             custo_maximo = linhas_producao[i].custo;
         }
         soma_custos += linhas_producao[i].custo;
     }
-
+    // ISSO AQUI TÁ ERRADO, TEM QUE AJEITAR, É PROVISÓRIO PRA VER O SWAP FUNCIONANDO
     return soma_custos;
 }
 
