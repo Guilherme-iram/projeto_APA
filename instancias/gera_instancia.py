@@ -1,7 +1,7 @@
 from random import randint
 
-n_linhas = 4
-n_produtos = 20
+n_linhas = 2
+n_produtos = 14
 
 # Array de custos 
 custos = [randint(1, 8) for i in range(n_produtos)]
@@ -14,7 +14,7 @@ for i in range(n_produtos):
         if i == j:
             linha.append(0)
         else:
-            linha.append(randint(1, 13))
+            linha.append(randint(1, 100))
     matriz_distancias.append(linha)
 
 

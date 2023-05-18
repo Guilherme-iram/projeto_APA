@@ -56,14 +56,15 @@ int Solution::custo_total(){
     this->custo_linhas();
     
     int custo_maximo = this->linhas_producao[0].custo;
-
+    int soma_custos = 0;
     for (unsigned int i = 1; i < this->linhas_producao.size(); i++){
         if (linhas_producao[i].custo > custo_maximo){           
             custo_maximo = linhas_producao[i].custo;
         }
+        soma_custos += linhas_producao[i].custo;
     }
 
-    return custo_maximo;
+    return soma_custos;
 }
 
 void Solution::print_solution(){

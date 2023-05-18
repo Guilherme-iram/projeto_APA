@@ -7,6 +7,7 @@
 #include "Instancia.cpp"
 #include "Solution.cpp"
 #include "Construcao.cpp"
+#include "Vizinhancas.cpp"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ int main()
 {
     //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
     
-    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n450m16_A.txt";
+    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n29m4_A.txt";
     //string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/n450m16_A.txt";
     
     Instancia instancia = leitor_de_instancias(caminho_arquivo);
@@ -35,7 +36,7 @@ int main()
     solution.print_solution();
     cout << "------------------" << endl;
 
-    for (int i = 0; i < 10000; i++){
+    for (int i = 0; i < 0; i++){
         
         solution = algoritmo.construcao(instancia);
 
@@ -69,8 +70,21 @@ int main()
     cout << "Custo: " << best_solution.custo_total() << endl;
     best_solution.print_solution();
     std::cout << "Tempo de execução: " << elapsed_seconds.count() << " segundos\n";
+    cout << "------------------" << endl;
+
+    SwapIntra swp = SwapIntra(instancia);
+
+    swp.run(best_solution);
+
+    cout << "------------------" << endl;
+    cout << "Melhor solucao APOS SWAP: " << endl;
+    cout << "Custo: " << best_solution.custo_total() << endl;
+    best_solution.print_solution();
+    std::cout << "Tempo de execução: " << elapsed_seconds.count() << " segundos\n";
     std::cout << "FIM DO PROGRAMA" << std::endl;
     cout << "------------------" << endl;
+    
+
     return 0;
 }
 
