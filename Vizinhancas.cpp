@@ -18,7 +18,7 @@ class SwapIntra
         {
             int deltaCusto;
             int best_caso = 0;
-            vector<int> vec_aux = {0, 0};
+            std::vector<int> vec_aux = {0, 0};
             int bestDeltaCusto = 0;
             int best_n_l = 0;
             int best_i = 0;
@@ -47,12 +47,12 @@ class SwapIntra
             
             if (bestDeltaCusto < 0)
             {
-                cout << "SwapIntra ENCONTRADO! " << endl;
-                cout << "DELTA: " << bestDeltaCusto << endl;
-                cout << "Linha: " << best_n_l << endl;
-                cout << "i: " << best_i << endl;
-                cout << "j: " << best_j << endl;
-                cout << "Caso: " << best_caso << endl;
+                std::cout << "SwapIntra ENCONTRADO! " << std::endl;
+                std::cout << "DELTA: " << bestDeltaCusto << std::endl;
+                std::cout << "Linha: " << best_n_l << std::endl;
+                std::cout << "i: " << best_i << std::endl;
+                std::cout << "j: " << best_j << std::endl;
+                std::cout << "Caso: " << best_caso << std::endl;
                 swap(s, best_n_l, best_i, best_j);
             }
             
@@ -65,14 +65,14 @@ class SwapIntra
             s.linhas_producao[n_l].produtos[j] = aux;
         };
 
-        vector<int> costSwap(const Solution& s, int n_l, int i, int j)
+        std::vector<int> costSwap(const Solution& s, int n_l, int i, int j)
         {
             int deltaCusto = 0;
             int caso = 0;
             int size_p = s.linhas_producao[n_l].produtos.size();
             if (i == 0 && j == size_p - 1)
             {
-                // std::cout << "CASO 1" << std::endl;
+                // std::std::cout << "CASO 1" << std::std::endl;
                 if (size_p == 2)
                 {
                     deltaCusto = - instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i] - 1][s.linhas_producao[n_l].produtos[j] - 1]
@@ -90,7 +90,7 @@ class SwapIntra
 
             else if (i == 0 && j == 1)
             {
-                // std::cout << "CASO 2" << std::endl;
+                // std::std::cout << "CASO 2" << std::std::endl;
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i] - 1][s.linhas_producao[n_l].produtos[i + 1] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[j] - 1][s.linhas_producao[n_l].produtos[j + 1] - 1];
 
@@ -100,7 +100,7 @@ class SwapIntra
             }
             else if (i == 0 && j > 1)
             {
-                // std::cout << "CASO 3" << std::endl;
+                // std::std::cout << "CASO 3" << std::std::endl;
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i] - 1][s.linhas_producao[n_l].produtos[i + 1] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[j - 1] - 1][s.linhas_producao[n_l].produtos[j] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[j] - 1][s.linhas_producao[n_l].produtos[j + 1] - 1];
@@ -114,7 +114,7 @@ class SwapIntra
 
             else if (j == (size_p - 1) && i == (size_p - 2))
             {
-                // std::cout << "CASO 4" << std::endl;
+                // std::std::cout << "CASO 4" << std::std::endl;
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i - 1] - 1][s.linhas_producao[n_l].produtos[i] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[j - 1] - 1][s.linhas_producao[n_l].produtos[j] - 1];
 
@@ -124,7 +124,7 @@ class SwapIntra
             }
             else if (j == (size_p - 1) && i < (size_p - 2))
             {
-                // std::cout << "CASO 5" << std::endl;
+                // std::std::cout << "CASO 5" << std::std::endl;
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i - 1] - 1][s.linhas_producao[n_l].produtos[i] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i] - 1][s.linhas_producao[n_l].produtos[i + 1] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[j - 1] - 1][s.linhas_producao[n_l].produtos[j] - 1];
@@ -136,7 +136,7 @@ class SwapIntra
             }
             else if (i + 1 == j)
             {
-                // std::cout << "CASO 6" << std::endl;
+                // std::std::cout << "CASO 6" << std::std::endl;
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i - 1] - 1][s.linhas_producao[n_l].produtos[i] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i] - 1][s.linhas_producao[n_l].produtos[j] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[j] - 1][s.linhas_producao[n_l].produtos[j + 1] - 1];
@@ -148,7 +148,7 @@ class SwapIntra
             }
             else
             {
-                // std::cout << "Caso BASE" << std::endl;
+                // std::std::cout << "Caso BASE" << std::std::endl;
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i - 1] - 1][s.linhas_producao[n_l].produtos[i] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i] - 1][s.linhas_producao[n_l].produtos[i + 1] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[j - 1] - 1][s.linhas_producao[n_l].produtos[j] - 1];
