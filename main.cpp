@@ -17,7 +17,7 @@ int main()
     //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
     
     //string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n29m4_A.txt";
-    string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/instancia_1.txt";
+    string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/instancia_custom_2.txt";
     
     Instancia instancia = leitor_de_instancias(caminho_arquivo);
 
@@ -89,7 +89,9 @@ int main()
     // }
 
     SwapInter swinter = SwapInter(instancia);
-    swinter.costSwap(best_solution, 0, 1, 0, 1);
+
+    // Sequência: (linha i, linha j, produto i, produto j)
+    swinter.costSwap(best_solution, 0, 1, 2, 1);
         
     auto end = std::chrono::high_resolution_clock::now();
 
