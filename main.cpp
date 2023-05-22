@@ -30,6 +30,9 @@ int main()
     solution = algoritmo.construcao(instancia);
     Solution best_solution = Solution(solution); 
 
+    SwapIntra swintra = SwapIntra(instancia);
+    SwapInter swinter = SwapInter(instancia);
+    
     // print solucao inicial
     cout << "------------------" << endl;
     cout << "Solucao inicial: " << endl;
@@ -37,73 +40,44 @@ int main()
     solution.print_solution();
     cout << "------------------" << endl;
 
-    for (int i = 0; i < 0; i++){
+    for (int i = 1; i < 100001; i++){
         
         solution = algoritmo.construcao(instancia);
         
-        if (solution.custo_total < best_solution.custo_total){
-        
-            best_solution = Solution(solution);
-
-            cout << "------------------" << endl;
-            cout << "Iteracao: " << i << endl;
-            cout << "Nova Melhor solucao: " << endl;
-            cout << "Custo: " << best_solution.custo_total << endl;
-            cout << "------------------" << endl;
-        }
-
-        if (i % 10 == 0){
-            cout << "------------------" << endl;
-            cout << "Iteracao: " << i << endl;
-            cout << "------------------" << endl;
-        }
-        
-    }
-    
-
-
-    // Impressão do tempo de execução em segundos
-
-    cout << "------------------" << endl;
-    cout << "Melhor solucao: " << endl;
-    cout << "Custo: " << best_solution.custo_total << endl;
-    best_solution.print_solution();
-    cout << "------------------" << endl;
-
-
-    SwapIntra swintra = SwapIntra(instancia);
-    SwapInter swinter = SwapInter(instancia);
-
-    
-    for (int i = 1; i <= 2; i++)
-    {
-        double melhor_custo = solution.custo_total;
-     
-        switch (i)
+        for (int k = 1; k <= 2; k++)
         {
-            case 1:
-                swintra.run(solution);
-                break;
+            double melhor_custo = best_solution.custo_total;
         
-            case 2:
-                swinter.run(solution);
-                break;
+            switch (k)
+            {
+                case 1:
+                    swintra.run(solution);
+                    break;
+            
+                case 2:
+                    swinter.run(solution);
+                    break;
+            }
+            
+            solution.calcula_custo_total();
+
+            if (solution.custo_total < melhor_custo)
+            {   
+                melhor_custo = solution.custo_total;
+                best_solution = solution;
+                k = 1;
+
+                cout << "------------------" << endl;
+                cout << "Iteracao: " << i << endl;
+                cout << "NOVO MELHOR Custo: " << best_solution.custo_total << endl;
+                // cout << "------------------" << endl;
+
+            } 
+
         }
         
-        solution.calcula_custo_total();
-
-        if (solution.custo_total < melhor_custo)
-        {   
-            cout << "RESETOU! \n" << endl;
-            melhor_custo = solution.custo_total;
-            best_solution = solution;
-            i = 1;
-        } 
-
     }
     
-    // Sequência: (linha i, linha j, produto i, produto j)
-    // swinter.costSwap(best_solution, 0, 1, 2, 1);
         
     auto end = std::chrono::high_resolution_clock::now();
 
@@ -119,10 +93,8 @@ int main()
     std::cout << "Tempo de execução: " << elapsed_seconds.count() << " segundos\n";
     std::cout << "FIM DO PROGRAMA" << std::endl;
     cout << "------------------" << endl;
-    
-    // cout << "Delta custo: " << custo_novo - custo_antigo << endl;
-    // std::cout << "Tempo de execução: " << elapsed_seconds.count() << " segundos\n";
 
     return 0;
+    
 }
 

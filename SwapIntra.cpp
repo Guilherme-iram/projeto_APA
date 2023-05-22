@@ -47,16 +47,17 @@ class SwapIntra
             
             if (bestDeltaCusto < 0)
             {
-                std::cout << "SwapIntra ENCONTRADO! " << std::endl;
-                std::cout << "DELTA: " << bestDeltaCusto << std::endl;
-                std::cout << "Linha: " << best_n_l << std::endl;
-                std::cout << "i: " << best_i << std::endl;
-                std::cout << "j: " << best_j << std::endl;
-                std::cout << "Caso: " << best_caso << std::endl;
+                // std::cout << "SwapIntra ENCONTRADO! " << std::endl;
+                // std::cout << "DELTA: " << bestDeltaCusto << std::endl;
+                // std::cout << "Linha: " << best_n_l << std::endl;
+                // std::cout << "i: " << best_i << std::endl;
+                // std::cout << "j: " << best_j << std::endl;
+                // std::cout << "Caso: " << best_caso << std::endl;
 
                 swap(s, best_n_l, best_i, best_j);
                 s.media_custo += (bestDeltaCusto / instancia.n_linhas);
                 double nova_variancia = 0;
+                
                 for (int i = 0; i < instancia.n_linhas; i++)
                 {
                     nova_variancia += pow((s.media_custo - s.linhas_producao[i].custo), 2);
