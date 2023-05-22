@@ -69,6 +69,7 @@ class Algoritmo
             }
 
             Solution solution = Solution(linhas_de_producao, instancia);
+            solution.calcula_custo_total();
             return solution;
         }
 };

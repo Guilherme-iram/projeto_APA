@@ -13,14 +13,17 @@ class Solution{
         Solution(const Solution& s);
         Solution(std::vector<Linha_producao> linhas, Instancia instancia);
         Solution(std::vector<Linha_producao> linhas,
-        int tempo_total, Instancia instancia);
+        int custo_total, Instancia instancia);
         
 
         std::vector<Linha_producao> linhas_producao;
-        int tempo_total = 9999;
+        double media_custo;
+        double variancia_custo;
+        int custo_total = 9999;
         Instancia instancia;
 
         void custo_linhas();
-        int custo_total();
+        void calcula_custo_total();
         void print_solution();
+        double custo_avaliacao();
 };

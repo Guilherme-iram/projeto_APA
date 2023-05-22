@@ -1,7 +1,7 @@
 #include "Solution.hpp"
 #include "Instancia.hpp"
 #include "iostream"
-
+#include "math.h"
 
 class SwapIntra
 {
@@ -53,7 +53,15 @@ class SwapIntra
                 std::cout << "i: " << best_i << std::endl;
                 std::cout << "j: " << best_j << std::endl;
                 std::cout << "Caso: " << best_caso << std::endl;
+
                 swap(s, best_n_l, best_i, best_j);
+                s.media_custo += (bestDeltaCusto / instancia.n_linhas);
+                double nova_variancia = 0;
+                for (int i = 0; i < instancia.n_linhas; i++)
+                {
+                    nova_variancia += pow((s.media_custo - s.linhas_producao[i].custo), 2);
+                }
+                s.variancia_custo = nova_variancia;
             }
             
         }
