@@ -51,24 +51,22 @@ int main()
             solution = algoritmo.construcao(instancia);
             
             // VND
-            for (int k = 1; k <= 1; k++)
+            for (int k = 1; k <= 3; k++)
             {
                 double melhor_custo = best_solution.custo_total;
             
                 switch (k)
-                // NÃO CONSEGUE CHEGAR AO CASO 3 REVISAR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 {
                     case 1:
-                        reinsertion.run(solution);
-                        //swintra.run(solution);
+                        swintra.run(solution);
                         break;
                 
                     case 2:
-                        //swinter.run(solution);
+                        swinter.run(solution);
                         break;
 
                     case 3:
-                        //reinsertion.run(solution);
+                        reinsertion.run(solution);
                         break;
                     
                 }
@@ -77,11 +75,13 @@ int main()
 
                 if (solution.custo_total < melhor_custo)
                 {   
+                    cout << "Swintra 1; Swinter 2; Reinsertion 3: " << k << endl;
                     melhor_custo = solution.custo_total;
                     best_solution = solution;
                     k = 0;
 
                     // cout << "------------------" << endl;
+                    
                     cout << "Iteracao: " << i << endl;
                     cout << "NOVO MELHOR Custo: " << best_solution.custo_total << endl;
                     // cout << "------------------" << endl;
