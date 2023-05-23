@@ -16,12 +16,11 @@ int main()
 {
     //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
     
-    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n29m4_A.txt";
+    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n40m5_A.txt";
     // string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/instancia_custom_2.txt";
     
     Instancia instancia = leitor_de_instancias(caminho_arquivo);
 
-    // print all products ids
     auto start = std::chrono::high_resolution_clock::now();
 
     Solution solution;
@@ -40,10 +39,12 @@ int main()
     solution.print_solution();
     cout << "------------------" << endl;
 
-    for (int i = 1; i < 100001; i++){
+    // GRASP 
+    for (int i = 1; i < 10001; i++){
         
         solution = algoritmo.construcao(instancia);
         
+        // VND
         for (int k = 1; k <= 2; k++)
         {
             double melhor_custo = best_solution.custo_total;
@@ -97,4 +98,3 @@ int main()
     return 0;
     
 }
-

@@ -60,23 +60,14 @@ public:
 
                 swap(s, best_l1, best_l2, best_i, best_j);
 
-                int produto_i = s.linhas_producao[best_l1].produtos[best_i];
-                int produto_j = s.linhas_producao[best_l2].produtos[best_j];
+                // int produto_i = s.linhas_producao[best_l1].produtos[best_i];
+                // int produto_j = s.linhas_producao[best_l2].produtos[best_j];
 
-                s.linhas_producao[best_l1].custo -= instancia.custo_producao[produto_i - 1];
-                s.linhas_producao[best_l1].custo += instancia.custo_producao[produto_j - 1];
-                s.linhas_producao[best_l2].custo -= instancia.custo_producao[produto_j - 1];
-                s.linhas_producao[best_l2].custo += instancia.custo_producao[produto_i - 1];
+                // s.linhas_producao[best_l1].custo -= instancia.custo_producao[produto_i - 1];
+                // s.linhas_producao[best_l1].custo += instancia.custo_producao[produto_j - 1];
+                // s.linhas_producao[best_l2].custo -= instancia.custo_producao[produto_j - 1];
+                // s.linhas_producao[best_l2].custo += instancia.custo_producao[produto_i - 1];
 
-                s.media_custo += (bestDeltaCusto / instancia.n_linhas);
-
-                double nova_variancia = 0;
-                
-                for (unsigned int i = 0; i < instancia.n_linhas; i++)
-                {
-                    nova_variancia += pow((s.media_custo - s.linhas_producao[i].custo), 2);
-                }
-                s.variancia_custo = nova_variancia;
             }
             
     }

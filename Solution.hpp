@@ -17,13 +17,10 @@ class Solution{
         
 
         std::vector<Linha_producao> linhas_producao;
-        double media_custo;
-        double variancia_custo;
         int custo_total = 9999;
         Instancia instancia;
 
         void custo_linhas();
         void calcula_custo_total();
         void print_solution();
-        double custo_avaliacao();
 };
