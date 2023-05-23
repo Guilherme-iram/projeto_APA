@@ -54,13 +54,13 @@ class SwapIntra
                 // std::cout << "j: " << best_j << std::endl;
                 // std::cout << "Caso: " << best_caso << std::endl;
 
-                swap(s, best_n_l, best_i, best_j);
+                movement(s, best_n_l, best_i, best_j);
                 // s.linhas_producao[best_n_l].custo += bestDeltaCusto;
             }
             
         }
 
-        void swap(Solution& s, int n_l, int i, int j)
+        void movement(Solution& s, int n_l, int i, int j)
         {
             int aux = s.linhas_producao[n_l].produtos[i];
             s.linhas_producao[n_l].produtos[i] = s.linhas_producao[n_l].produtos[j];

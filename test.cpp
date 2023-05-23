@@ -44,10 +44,12 @@ int main()
     int l1 = 0;
     int l2 = 1;
     int i = 1;
-    int j = solution.linhas_producao[l2].produtos.size() - 2;
+    int j = solution.linhas_producao[l2].produtos.size();
 
-    reinsertion.movement(solution, l1, l2, i, j);
+    reinsertion.run(solution);
 
+    solution.calcula_custo_total();
+    
     cout << "------------------" << endl;
     cout << "Melhor APOS REINSERTION: " << endl;
     cout << "Custo: " << solution.custo_total << endl;

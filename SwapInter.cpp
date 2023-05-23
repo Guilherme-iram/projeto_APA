@@ -58,7 +58,7 @@ public:
                 // std::cout << "j: " << best_j << std::endl;
                 // std::cout << "Caso: " << best_caso << std::endl;
 
-                swap(s, best_l1, best_l2, best_i, best_j);
+                movement(s, best_l1, best_l2, best_i, best_j);
 
                 // int produto_i = s.linhas_producao[best_l1].produtos[best_i];
                 // int produto_j = s.linhas_producao[best_l2].produtos[best_j];
@@ -72,7 +72,7 @@ public:
             
     }
 
-    void swap(Solution &s, int l1, int l2, int i, int j)
+    void movement(Solution &s, int l1, int l2, int i, int j)
     {
         int aux = s.linhas_producao[l1].produtos[i];
         s.linhas_producao[l1].produtos[i] = s.linhas_producao[l2].produtos[j];

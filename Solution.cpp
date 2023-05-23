@@ -31,15 +31,17 @@ void Solution::custo_linhas(){
     
     int custo_linha;
     unsigned int len_linha;
-    double media_custo = 0;
 
     for (unsigned int i = 0; i < linhas_producao.size() ; i++){
+        
         custo_linha = 0;
         len_linha = linhas_producao[i].produtos.size();
+        
         for (int j = 0; j < len_linha - 1; j++){
             custo_linha += instancia.tempo_preparo[linhas_producao[i].produtos[j] - 1][linhas_producao[i].produtos[j + 1] - 1];
             custo_linha += instancia.custo_producao[linhas_producao[i].produtos[j] - 1];
         }
+        
         custo_linha += instancia.custo_producao[linhas_producao[i].produtos[len_linha - 1] - 1];
         linhas_producao[i].custo = custo_linha;
     }
