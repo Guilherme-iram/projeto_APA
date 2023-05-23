@@ -25,11 +25,13 @@ class Reinsertion
 
                 for (int l1 = 0; l1 < instancia.n_linhas - 1; l1++)
                 {
+                    if(!(s.linhas_producao[l1].produtos.size() > 1)) continue;
+
                     for (int l2 = l1 + 1; l2 < instancia.n_linhas; l2++)
                     {   
-                        for (int i = s.linhas_producao[l1].produtos.size(); i == 0; i--)
+                        for (int i = 0; i < s.linhas_producao[l1].produtos.size(); i++)
                         {
-                            for (int j = s.linhas_producao[l2].produtos.size(); j == 0 ; j--)
+                            for (int j = 0; j <= s.linhas_producao[l2].produtos.size(); j++)
                                 {
                                     vec_aux = costReinsertion(s, l1, l2, i, j);
                                     deltaCusto = vec_aux[1];

@@ -23,7 +23,7 @@ int main()
     Instancia instancia = leitor_de_instancias(caminho_arquivo);
     vector<int> custos;
 
-    for (int exec = 0; exec < 10; exec++)
+    for (int exec = 0; exec < 1; exec++)
     {
         auto start = std::chrono::high_resolution_clock::now();
 
@@ -56,17 +56,19 @@ int main()
                 double melhor_custo = best_solution.custo_total;
             
                 switch (k)
+                // NÃO CONSEGUE CHEGAR AO CASO 3 REVISAR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 {
                     case 1:
-                        swintra.run(solution);
+                        reinsertion.run(solution);
+                        //swintra.run(solution);
                         break;
                 
                     case 2:
-                        swinter.run(solution);
+                        //swinter.run(solution);
                         break;
 
                     case 3:
-                        reinsertion.run(solution);
+                        //reinsertion.run(solution);
                         break;
                     
                 }
