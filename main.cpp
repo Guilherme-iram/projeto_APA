@@ -17,8 +17,8 @@ int main()
 {
     //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
     
-    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n40m5_A.txt";
-    // string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/instancia_custom_2.txt";
+    //string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n40m5_A.txt";
+    string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/n40m5_A.txt";
     
     Instancia instancia = leitor_de_instancias(caminho_arquivo);
     vector<int> custos;
@@ -45,7 +45,7 @@ int main()
         cout << "------------------" << endl;
 
         // GRASP 
-        int GRAPS_max_iter = 201;
+        int GRAPS_max_iter = 10000;
         for (int i = 1; i < GRAPS_max_iter; i++){
             
             solution = algoritmo.construcao(instancia);
@@ -58,8 +58,7 @@ int main()
                 switch (k)
                 {
                     case 1:
-                        reinsertion.run(solution);
-                        // swintra.run(solution);
+                        swintra.run(solution);
                         break;
                 
                     case 2:
