@@ -10,21 +10,44 @@
 #include "SwapIntra.cpp"
 #include "SwapInter.cpp"
 #include "Reinsertion.cpp"
+#include "Perturbacao.cpp"
 
 using namespace std;
 
 int main()
 {
     //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
-    
-    //string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n40m5_A.txt";
-    string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/n40m5_A.txt";
-    
-    Instancia instancia = leitor_de_instancias(caminho_arquivo);
+    vector<string> instances_name = 
+    {
+        "n10m2_A.txt",
+        "n10m2_B.txt",
+        "n15m3_A.txt",
+        "n15m3_B.txt",
+        "n15m4_A.txt",
+        "n15m4_B.txt",
+        "n29m4_A.txt",
+        "n29m4_B.txt",
+        "n29m6_A.txt",
+        "n29m6_B.txt",
+        "n40m5_A.txt",
+        "n40m5_B.txt",
+        "n52m5_A.txt",
+        "n52m5_B.txt",
+        "n450m16_A.txt",
+        "n500m10_A.txt"
+    };
+
+
     vector<int> custos;
 
     for (int exec = 0; exec < 1; exec++)
     {
+        string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\" + instances_name[12];
+        cout << caminho_arquivo << endl;
+        // string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n52m5_A.txt";
+        // string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/n40m5_A.txt";
+        
+        Instancia instancia = leitor_de_instancias(caminho_arquivo);
         auto start = std::chrono::high_resolution_clock::now();
 
         Solution solution;
@@ -36,6 +59,7 @@ int main()
         SwapIntra swintra = SwapIntra(instancia);
         SwapInter swinter = SwapInter(instancia);
         Reinsertion reinsertion = Reinsertion(instancia);
+        Pertubacao_ultra_swap pertubacao = Pertubacao_ultra_swap(instancia);
 
         // print solucao inicial
         cout << "------------------" << endl;
@@ -45,11 +69,11 @@ int main()
         cout << "------------------" << endl;
 
         // GRASP 
-        int GRAPS_max_iter = 10000;
-        for (int i = 1; i < GRAPS_max_iter; i++){
+        int GRAPS_max_iter = 500;
+        for (int i = 0; i < GRAPS_max_iter; i++){
             
             solution = algoritmo.construcao(instancia);
-            
+            pertubacao.run(solution);
             // VND
             for (int k = 1; k <= 3; k++)
             {
@@ -120,7 +144,6 @@ int main()
     }
     cout << "------------------" << endl;
     
-
     return 0;
     
 }

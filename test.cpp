@@ -10,6 +10,7 @@
 #include "SwapIntra.cpp"
 #include "SwapInter.cpp"
 #include "Reinsertion.cpp"
+#include "Perturbacao.cpp"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ int main()
 {
     //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
     
-    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n40m5_A.txt";
+    string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n10m2_A.txt";
     // string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/instancia_custom_2.txt";
     
     Instancia instancia = leitor_de_instancias(caminho_arquivo);
@@ -33,7 +34,7 @@ int main()
     // SwapIntra swintra = SwapIntra(instancia);
     // SwapInter swinter = SwapInter(instancia);
     Reinsertion reinsertion = Reinsertion(instancia);
-    
+    Pertubacao_ultra_swap pertubacao = Pertubacao_ultra_swap(instancia); 
     // print solucao inicial
     cout << "------------------" << endl;
     cout << "Solucao inicial: " << endl;
@@ -41,22 +42,11 @@ int main()
     solution.print_solution();
     cout << "------------------" << endl;
 
-    int l1 = 0;
-    int l2 = 1;
-    int i = 1;
-    int j = solution.linhas_producao[l2].produtos.size();
-
-    reinsertion.run(solution);
-
+    pertubacao.run(solution);
     solution.calcula_custo_total();
-    
     cout << "------------------" << endl;
-    cout << "Melhor APOS REINSERTION: " << endl;
-    cout << "Custo: " << solution.custo_total << endl;
+    // pertubacao.run(solution);
     solution.print_solution();
-    std::cout << "FIM DO PROGRAMA" << std::endl;
-    cout << "------------------" << endl;
-
     return 0;
     
 }
