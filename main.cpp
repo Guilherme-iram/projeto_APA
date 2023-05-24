@@ -11,6 +11,7 @@
 #include "SwapInter.cpp"
 #include "Reinsertion.cpp"
 #include "Perturbacao.cpp"
+#include "VND.cpp"
 
 using namespace std;
 
@@ -42,19 +43,21 @@ int main()
 
     for (int exec = 0; exec < 1; exec++)
     {
-        string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\" + instances_name[12];
+        string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\" + instances_name[3];
         cout << caminho_arquivo << endl;
         // string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n52m5_A.txt";
         // string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/n40m5_A.txt";
         
         Instancia instancia = leitor_de_instancias(caminho_arquivo);
+
         auto start = std::chrono::high_resolution_clock::now();
 
         Solution solution;
+        Solution best_solution;
         Algoritmo algoritmo;
 
         solution = algoritmo.construcao(instancia);
-        Solution best_solution = Solution(solution); 
+        best_solution = Solution(solution); 
 
         SwapIntra swintra = SwapIntra(instancia);
         SwapInter swinter = SwapInter(instancia);
@@ -69,54 +72,31 @@ int main()
         cout << "------------------" << endl;
 
         // GRASP 
-        int GRAPS_max_iter = 500;
+        int GRAPS_max_iter = 100;
+
         for (int i = 0; i < GRAPS_max_iter; i++){
             
             solution = algoritmo.construcao(instancia);
-            pertubacao.run(solution);
-            // VND
-            for (int k = 1; k <= 3; k++)
+
+            for (int j = 0; j < 10; j++)
             {
-                double melhor_custo = best_solution.custo_total;
-            
-                switch (k)
+                pertubacao.run(solution);
+                buscaLocal(solution, swintra, swinter, reinsertion);
+
+                if (solution.custo_total < best_solution.custo_total)
                 {
-                    case 1:
-                        swintra.run(solution);
-                        break;
-                
-                    case 2:
-                        swinter.run(solution);
-                        break;
-
-                    case 3:
-                        reinsertion.run(solution);
-                        break;
-                    
-                }
-                
-                solution.calcula_custo_total();
-
-                if (solution.custo_total < melhor_custo)
-                {   
-                    cout << "Swintra 1; Swinter 2; Reinsertion 3: " << k << endl;
-                    melhor_custo = solution.custo_total;
                     best_solution = solution;
-                    k = 0;
 
-                    // cout << "------------------" << endl;
-                    
-                    cout << "Iteracao: " << i << endl;
+                    cout << "------------------" << endl;
+                    cout << "Iteracao GRASP: " << i << endl;
+                    cout << "Iteracao ILS: " << j << endl;
                     cout << "NOVO MELHOR Custo: " << best_solution.custo_total << endl;
-                    // cout << "------------------" << endl;
-
-                } 
-
+                    cout << "------------------" << endl;
+                }
             }
 
         }
-        
-            
+
         auto end = std::chrono::high_resolution_clock::now();
 
         // Cálculo do tempo de execução em segundos
@@ -133,7 +113,7 @@ int main()
         cout << "------------------" << endl;
 
         custos.push_back(best_solution.custo_total);
-    }
+    
 
     // imprima todos os custos
     cout << "------------------" << endl;
@@ -143,7 +123,8 @@ int main()
         cout << " => " << custos[i] << endl;
     }
     cout << "------------------" << endl;
-    
+    }
+
     return 0;
     
 }

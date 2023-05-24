@@ -1,3 +1,5 @@
+#pragma once 
+
 #include "Solution.hpp"
 #include "Instancia.hpp"
 #include <iostream>
