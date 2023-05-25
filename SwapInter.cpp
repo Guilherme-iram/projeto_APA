@@ -52,24 +52,7 @@ public:
 
             if (bestDeltaCusto < 0)
             {
-                // std::cout << "SWAP INTER ENCONTRADO! " << std::endl;
-                // std::cout << "DELTA: " << bestDeltaCusto << std::endl;
-                // std::cout << "Linha 1: " << best_l1 << std::endl;
-                // std::cout << "Linha 2: " << best_l2 << std::endl;
-                // std::cout << "i: " << best_i << std::endl;
-                // std::cout << "j: " << best_j << std::endl;
-                // std::cout << "Caso: " << best_caso << std::endl;
-
                 movement(s, best_l1, best_l2, best_i, best_j);
-
-                // int produto_i = s.linhas_producao[best_l1].produtos[best_i];
-                // int produto_j = s.linhas_producao[best_l2].produtos[best_j];
-
-                // s.linhas_producao[best_l1].custo -= instancia.custo_producao[produto_i - 1];
-                // s.linhas_producao[best_l1].custo += instancia.custo_producao[produto_j - 1];
-                // s.linhas_producao[best_l2].custo -= instancia.custo_producao[produto_j - 1];
-                // s.linhas_producao[best_l2].custo += instancia.custo_producao[produto_i - 1];
-
             }
             
     }

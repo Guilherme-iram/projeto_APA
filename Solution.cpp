@@ -4,11 +4,6 @@
 #include "Instancia.hpp"
 #include <math.h>
 
-Solution::Solution(std::vector<Linha_producao> linhas, int custo_total, Instancia instancia){
-    this->linhas_producao = linhas;
-    this->custo_total = custo_total;
-    this->instancia = instancia;
-}
 
 Solution::Solution(std::vector<Linha_producao> Linhas, Instancia instancia){
     this->linhas_producao = Linhas;

@@ -54,12 +54,7 @@ class Reinsertion
 
                 if (bestDeltaCusto < 0)
                 {
-
                     movement(s, best_l1, best_l2, best_i, best_j);
-                    
-
-                }else{
-                    return;
                 }
                 
         }
@@ -218,13 +213,6 @@ class Reinsertion
                 deltaCusto += instancia.tempo_preparo[s.linhas_producao[l1].produtos[i] - 1][s.linhas_producao[l2].produtos[j] - 1];
 
                 caso = 9;
-            }
-            else {
-                std::cout << "Caso não previsto" << std::endl;
-                std::cout << "Caso não previsto" << std::endl;
-                std::cout << "Caso não previsto" << std::endl;
-                std::cout << "Caso não previsto" << std::endl;
-                std::cout << "Caso não previsto" << std::endl;
             }
         
             return {caso, deltaCusto};

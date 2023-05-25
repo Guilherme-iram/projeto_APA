@@ -25,14 +25,6 @@ class Pertubacao_ultra_swap
             int rand_m = 1 + rand() % (s.linhas_producao[rand_l].produtos.size() > 2? s.linhas_producao[rand_l].produtos.size() - 2 : 2);
             int aux;
 
-            // print all randoms
-            // std::cout << "rand_l: " << rand_l << std::endl;
-            // std::cout << "rand_i: " << rand_i << std::endl;
-            // std::cout << "rand_j: " << rand_j << std::endl;
-            // std::cout << "rand_k: " << rand_k << std::endl;
-            // std::cout << "rand_m: " << rand_m << std::endl;
-            // std::cout << "size: " << s.linhas_producao[rand_l].produtos.size() << std::endl;
-
             if (rand_i > rand_j)
             {
                 aux = rand_i;
