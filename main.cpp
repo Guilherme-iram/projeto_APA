@@ -46,12 +46,12 @@ int main()
     vector<double> medias_custos;
     vector<double> medias_tempos;
 
-    int GRAPS_max_iter = 16;
+    int GRAPS_max_iter = 64;
     int ILS_max_iter = 4;
     int exec_max = 10;
 
     // Nao ta pegando as 2 ultimas instancias grandes aqui pra agilizar os testes
-    for (int inst = 0; inst < instances_name.size() - 2; inst++)
+    for (int inst = 0; inst < instances_name.size(); inst++)
     {
         vector<int> custos = {};
         vector<int> custos_construcao = {};
