@@ -63,7 +63,7 @@ int main()
             //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
             string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\" + instances_name[inst];
             // string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n52m5_A.txt";
-            // string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/n40m5_A.txt";
+            // string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/" + instances_name[inst];
             
             Instancia instancia = leitor_de_instancias(caminho_arquivo);
 
@@ -180,8 +180,8 @@ int main()
     registro_custo.push_back(std::to_string(ILS_max_iter));
 
     registro_construcao.push_back(std::to_string(exec_max));
-    registro_construcao.push_back(std::to_string(0));
-    registro_construcao.push_back(std::to_string(0));
+    registro_construcao.push_back(std::to_string(GRAPS_max_iter));
+    registro_construcao.push_back(std::to_string(ILS_max_iter));
 
     registro_tempo.push_back(std::to_string(exec_max));
     registro_tempo.push_back(std::to_string(GRAPS_max_iter));
@@ -203,10 +203,14 @@ int main()
             registro_tempo.push_back("9999");
         }
     }
-
+    
     adicionarRegistroCSV("resultados/resultados_custo.csv", registro_custo);
     adicionarRegistroCSV("resultados/resultados_construcao.csv", registro_construcao);
     adicionarRegistroCSV("resultados/resultados_tempo.csv", registro_tempo);
+
+    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_custo.csv", registro_custo);
+    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_construcao.csv", registro_construcao);
+    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_tempo.csv", registro_tempo);
     
     return 0;
     
