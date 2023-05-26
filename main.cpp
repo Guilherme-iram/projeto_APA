@@ -57,8 +57,8 @@ int main()
     vector<double> medias_VND_tempos;
     vector<double> medias_custos_tempos;
 
-    int Multi_Start_max_iter = 2;
-    int ILS_max_iter = 1;
+    int Multi_Start_max_iter = 256;
+    int ILS_max_iter = 4;
     int exec_max = 10;
 
     // Nao ta pegando as 2 ultimas instancias grandes aqui pra agilizar os testes
@@ -77,9 +77,9 @@ int main()
         {
 
             //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
-            string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\" + instances_name[inst];
+            // string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\" + instances_name[inst];
             // string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n52m5_A.txt";
-            // string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/" + instances_name[inst];
+            string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/" + instances_name[inst];
             
             Instancia instancia = leitor_de_instancias(caminho_arquivo);
 
@@ -272,22 +272,22 @@ int main()
         }
     }
     
-    adicionarRegistroCSV("resultados/resultados_custo.csv", registro_custo);
-    adicionarRegistroCSV("resultados/resultados_construcao.csv", registro_construcao);
-    adicionarRegistroCSV("resultados/resultados_VND.csv", registro_VND);
+    // adicionarRegistroCSV("resultados/resultados_custo.csv", registro_custo);
+    // adicionarRegistroCSV("resultados/resultados_construcao.csv", registro_construcao);
+    // adicionarRegistroCSV("resultados/resultados_VND.csv", registro_VND);
     
-    adicionarRegistroCSV("resultados/resultados_custo_tempo.csv", registro_custo_tempo);
-    adicionarRegistroCSV("resultados/resultados_construcao_tempo.csv", registro_construcao_tempo);
-    adicionarRegistroCSV("resultados/resultados_VND_tempo.csv", registro_VND_tempo);
+    // adicionarRegistroCSV("resultados/resultados_custo_tempo.csv", registro_custo_tempo);
+    // adicionarRegistroCSV("resultados/resultados_construcao_tempo.csv", registro_construcao_tempo);
+    // adicionarRegistroCSV("resultados/resultados_VND_tempo.csv", registro_VND_tempo);
 
 
-    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_custo.csv", registro_custo);
-    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_construcao.csv", registro_construcao);
-    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_VND.csv", registro_VND);
+    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_custo.csv", registro_custo);
+    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_construcao.csv", registro_construcao);
+    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_VND.csv", registro_VND);
 
-    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_custo_tempo.csv", registro_custo_tempo);
-    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_construcao_tempo.csv", registro_construcao_tempo);
-    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_VND_tempo.csv", registro_VND_tempo);
+    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_custo_tempo.csv", registro_custo_tempo);
+    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_construcao_tempo.csv", registro_construcao_tempo);
+    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_VND_tempo.csv", registro_VND_tempo);
     
     std::cout << "FIM DO PROGRAMA" << std::endl;
     
