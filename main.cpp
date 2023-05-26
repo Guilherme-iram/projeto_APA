@@ -59,7 +59,7 @@ int main()
     vector<double> medias_custos_tempos;
 
     int Multi_Start_max_iter = 512;
-    int ILS_max_iter = 8;
+    int ILS_max_iter = 16;
     int exec_max = 1;
 
     // Nao ta pegando as 2 ultimas instancias grandes aqui pra agilizar os testes
@@ -118,15 +118,6 @@ int main()
             tempos_vnd.push_back((end_vnd - start_vnd).count());
 
             for (int i = 0; i < Multi_Start_max_iter; i++){
-
-                if (i % 2 == 0)
-                {
-                    solution = algoritmo.construcao(instancia);
-                }
-                else
-                {
-                    solution = algoritmo.construcao_melhor_insersao(instancia);
-                }
 
                 solution = algoritmo.construcao(instancia);
                 buscaLocal(solution, swintra, swinter, reinsertion, swapline);
