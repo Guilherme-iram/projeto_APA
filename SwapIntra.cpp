@@ -19,7 +19,6 @@ class SwapIntra
         void run(Solution& s)
         {
             int deltaCusto;
-            int best_caso = 0;
             std::vector<int> vec_aux = {0, 0};
             int bestDeltaCusto = 0;
             int best_n_l = 0;
@@ -41,7 +40,6 @@ class SwapIntra
                             best_n_l = n_l;
                             best_i = i;
                             best_j = j;
-                            best_caso = vec_aux[0];
                         }
                     }
                 }

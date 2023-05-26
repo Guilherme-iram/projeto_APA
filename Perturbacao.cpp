@@ -3,13 +3,13 @@
 #include "iostream"
 #include "math.h"
 
-class Pertubacao_ultra_swap
+class Pertubacao_double_swap
 {
     public:
 
         Instancia instancia;
         
-        Pertubacao_ultra_swap (const Instancia& instancia)
+        Pertubacao_double_swap (const Instancia& instancia)
         {
             this->instancia = instancia;
         };

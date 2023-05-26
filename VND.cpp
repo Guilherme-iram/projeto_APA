@@ -6,7 +6,9 @@
 void buscaLocal(Solution& s, SwapIntra& swintra, SwapInter& swinter, Reinsertion& reinsertion)
 {
     int k = 1;
-    double melhor_custo = s.custo_total;
+    
+    Solution best_solution = Solution(s);
+    double melhor_custo = best_solution.custo_total;
     
     while (k <= 3)
     {
@@ -30,6 +32,7 @@ void buscaLocal(Solution& s, SwapIntra& swintra, SwapInter& swinter, Reinsertion
 
         if (s.custo_total < melhor_custo)
         {
+            best_solution = Solution(s);
             melhor_custo = s.custo_total;
             k = 1;
         }
@@ -38,5 +41,7 @@ void buscaLocal(Solution& s, SwapIntra& swintra, SwapInter& swinter, Reinsertion
             k++;
         }
     }
-    
+
+    s = Solution(best_solution);
+
 }

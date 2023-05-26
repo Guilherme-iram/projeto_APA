@@ -8,7 +8,7 @@ void criarArquivoCSV(const std::string& nomeArquivo) {
     std::ofstream arquivo(nomeArquivo);
     if (arquivo.is_open()) {
         // Escrever o cabeçalho das colunas
-        arquivo << "exec_max,Iter_GRASP,Iter_ILS,n10m2_A,n10m2_B,n15m3_A,n15m3_B,n15m4_A,n15m4_B,n29m4_A,n29m4_B,n29m6_A,n29m6_B,n40m5_A,n40m5_B,n52m5_A,n52m5_B,n450m16_A.txt,n500m10_A\n";
+        arquivo << "exec_max,Iter_GRASP,Iter_ILS,n10m2_A,n10m2_B,n15m3_A,n15m3_B,n15m4_A,n15m4_B,n29m4_A,n29m4_B,n29m6_A,n29m6_B,n40m5_A,n40m5_B,n52m5_A,n52m5_B,n450m16_A,n500m10_A\n";
         arquivo.close();
         std::cout << "Arquivo CSV criado com sucesso.\n";
     } else {
