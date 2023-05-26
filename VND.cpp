@@ -1,16 +1,17 @@
 #include "Solution.hpp"
 #include "SwapIntra.cpp"
 #include "SwapInter.cpp"
+#include "Swapline.cpp"
 #include "Reinsertion.cpp"
 
-void buscaLocal(Solution& s, SwapIntra& swintra, SwapInter& swinter, Reinsertion& reinsertion)
+void buscaLocal(Solution& s, SwapIntra& swintra, SwapInter& swinter, Reinsertion& reinsertion, Swapline& swapline)
 {
     int k = 1;
     
     Solution best_solution = Solution(s);
     double melhor_custo = best_solution.custo_total;
     
-    while (k <= 3)
+    while (k <= 4)
     {
         switch (k)
         {
@@ -26,6 +27,9 @@ void buscaLocal(Solution& s, SwapIntra& swintra, SwapInter& swinter, Reinsertion
                 reinsertion.run(s);
                 break;
             
+            case 4:
+                swapline.run(s);
+                break;
         }
         
         s.calcula_custo_total();

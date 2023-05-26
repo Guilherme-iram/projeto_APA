@@ -11,6 +11,7 @@
 #include "Construcao.cpp"
 #include "SwapIntra.cpp"
 #include "SwapInter.cpp"
+#include "Swapline.cpp"
 #include "Reinsertion.cpp"
 #include "Perturbacao.cpp"
 #include "VND.cpp"
@@ -57,9 +58,9 @@ int main()
     vector<double> medias_VND_tempos;
     vector<double> medias_custos_tempos;
 
-    int Multi_Start_max_iter = 256;
-    int ILS_max_iter = 4;
-    int exec_max = 10;
+    int Multi_Start_max_iter = 512;
+    int ILS_max_iter = 8;
+    int exec_max = 1;
 
     // Nao ta pegando as 2 ultimas instancias grandes aqui pra agilizar os testes
     for (int inst = 0; inst < instances_name.size(); inst++)
@@ -77,9 +78,8 @@ int main()
         {
 
             //Escolher o caminho da pasta e comentar o outro  !!!!!!!!!!!!!!!!!!!!!
-            // string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\" + instances_name[inst];
-            // string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\n52m5_A.txt";
-            string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/" + instances_name[inst];
+            string caminho_arquivo = "C:\\Users\\Guilherme\\Documents\\Faculdade\\p5\\APA\\projeto_APA\\instancias\\" + instances_name[inst];
+            // string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/" + instances_name[inst];
             
             Instancia instancia = leitor_de_instancias(caminho_arquivo);
 
@@ -89,10 +89,9 @@ int main()
             Solution best_solution;
             Algoritmo algoritmo;
 
- 
-            
             SwapIntra swintra = SwapIntra(instancia);
             SwapInter swinter = SwapInter(instancia);
+            Swapline swapline = Swapline(instancia);
             Reinsertion reinsertion = Reinsertion(instancia);
             Pertubacao_double_swap pertubacao = Pertubacao_double_swap(instancia);
 
@@ -101,11 +100,18 @@ int main()
             custos_construcao.push_back(solution.custo_total);
             auto end_construcao = std::chrono::high_resolution_clock::now();
             tempos_construcoes.push_back((end_construcao - start_construcao).count());
+
+            cout << "------------------" << endl;
+            cout << "SOLUCAO INICIAL Metaheuristica " << instances_name[inst] << " :"<< endl;
+            cout << "Custo: " << solution.custo_total << endl;
+            solution.print_solution();
+            cout << "Exec: " << exec + 1 << endl;
+            cout << "------------------" << endl;
             
             best_solution = Solution(solution);
 
             auto start_vnd = std::chrono::high_resolution_clock::now();
-            buscaLocal(best_solution, swintra, swinter, reinsertion);
+            buscaLocal(best_solution, swintra, swinter, reinsertion, swapline);
             auto end_vnd = std::chrono::high_resolution_clock::now();
 
             custos_vnd.push_back(best_solution.custo_total);
@@ -113,22 +119,22 @@ int main()
 
             for (int i = 0; i < Multi_Start_max_iter; i++){
 
-                // if (i % 2 == 0)
-                // {
-                //     solution = algoritmo.construcao(instancia);
-                // }
-                // else
-                // {
-                //     solution = algoritmo.construcao_melhor_insersao(instancia);
-                // }
+                if (i % 2 == 0)
+                {
+                    solution = algoritmo.construcao(instancia);
+                }
+                else
+                {
+                    solution = algoritmo.construcao_melhor_insersao(instancia);
+                }
 
                 solution = algoritmo.construcao(instancia);
-                buscaLocal(solution, swintra, swinter, reinsertion);
+                buscaLocal(solution, swintra, swinter, reinsertion, swapline);
 
                 for (int j = 0; j < ILS_max_iter; j++)
                 {
                     pertubacao.run(solution);
-                    buscaLocal(solution, swintra, swinter, reinsertion);
+                    buscaLocal(solution, swintra, swinter, reinsertion, swapline);
 
                     if (solution.custo_total < best_solution.custo_total)
                     {
@@ -151,10 +157,11 @@ int main()
             std::chrono::duration<double> elapsed_seconds = end_ils - start_ils;
 
             cout << "------------------" << endl;
-            cout << "Melhor solucao APOS SWAP: " << endl;
+            cout << "MELHOR solucao Metaheuristica " << instances_name[inst] << " :" << endl;
             cout << "Custo: " << best_solution.custo_total << endl;
             best_solution.print_solution();
-            std::cout << "Tempo de execução: " << elapsed_seconds.count() << " segundos\n";
+            cout << "Tempo de execução: " << elapsed_seconds.count() << " segundos\n";
+            cout << "Exec: " << exec + 1 << endl;
             cout << "------------------" << endl;
 
             custos.push_back(best_solution.custo_total);
@@ -272,22 +279,22 @@ int main()
         }
     }
     
-    // adicionarRegistroCSV("resultados/resultados_custo.csv", registro_custo);
-    // adicionarRegistroCSV("resultados/resultados_construcao.csv", registro_construcao);
-    // adicionarRegistroCSV("resultados/resultados_VND.csv", registro_VND);
+    adicionarRegistroCSV("resultados/resultados_custo.csv", registro_custo);
+    adicionarRegistroCSV("resultados/resultados_construcao.csv", registro_construcao);
+    adicionarRegistroCSV("resultados/resultados_VND.csv", registro_VND);
     
-    // adicionarRegistroCSV("resultados/resultados_custo_tempo.csv", registro_custo_tempo);
-    // adicionarRegistroCSV("resultados/resultados_construcao_tempo.csv", registro_construcao_tempo);
-    // adicionarRegistroCSV("resultados/resultados_VND_tempo.csv", registro_VND_tempo);
+    adicionarRegistroCSV("resultados/resultados_custo_tempo.csv", registro_custo_tempo);
+    adicionarRegistroCSV("resultados/resultados_construcao_tempo.csv", registro_construcao_tempo);
+    adicionarRegistroCSV("resultados/resultados_VND_tempo.csv", registro_VND_tempo);
 
 
-    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_custo.csv", registro_custo);
-    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_construcao.csv", registro_construcao);
-    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_VND.csv", registro_VND);
+    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_custo.csv", registro_custo);
+    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_construcao.csv", registro_construcao);
+    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_VND.csv", registro_VND);
 
-    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_custo_tempo.csv", registro_custo_tempo);
-    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_construcao_tempo.csv", registro_construcao_tempo);
-    adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_VND_tempo.csv", registro_VND_tempo);
+    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_custo_tempo.csv", registro_custo_tempo);
+    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_construcao_tempo.csv", registro_construcao_tempo);
+    // adicionarRegistroCSV("/home/mikenew/projeto_APA/resultados/resultados_VND_tempo.csv", registro_VND_tempo);
     
     std::cout << "FIM DO PROGRAMA" << std::endl;
     
