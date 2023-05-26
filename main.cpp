@@ -58,8 +58,8 @@ int main()
     vector<double> medias_VND_tempos;
     vector<double> medias_custos_tempos;
 
-    int Multi_Start_max_iter = 512;
-    int ILS_max_iter = 16;
+    int Multi_Start_max_iter = 256;
+    int ILS_max_iter = 8;
     int exec_max = 1;
 
     // Nao ta pegando as 2 ultimas instancias grandes aqui pra agilizar os testes
