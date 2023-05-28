@@ -58,8 +58,9 @@ int main()
     vector<double> medias_VND_tempos;
     vector<double> medias_custos_tempos;
 
-    int Multi_Start_max_iter = 500;
-    int ILS_max_iter = 10;
+    int Multi_Start_max_iter = 32;
+    int ILS_max_iter = 8;
+    double alpha = 0.5;
     int exec_max = 1;
 
     // Nao ta pegando as 2 ultimas instancias grandes aqui pra agilizar os testes
@@ -87,7 +88,7 @@ int main()
 
             Solution solution;
             Solution best_solution;
-            Algoritmo algoritmo;
+            Algoritmo algoritmo = Algoritmo(alpha);
 
             SwapIntra swintra = SwapIntra(instancia);
             SwapInter swinter = SwapInter(instancia);
@@ -138,8 +139,16 @@ int main()
                         cout << "------------------" << endl;
 
                         j = 0;
+                        i = 0;
                     }
+
+
                 }
+
+                // if (i % 100 == 0)
+                // {
+                cout << "Iteracao GRASP: " << i << endl;
+                // }
             }
 
             auto end_ils = std::chrono::high_resolution_clock::now();
@@ -210,6 +219,15 @@ int main()
         tempo_total += medias_custos_tempos[i];
     }
 
+    double media_total = 0;
+    for (int i = 0; i < medias_custos.size(); i++)
+    {
+        media_total += medias_custos[i];
+    }
+    media_total = media_total / medias_custos.size();
+
+    cout << "------------------" << endl;
+    cout << "Média total: " << media_total << endl;
     cout << "------------------" << endl;
     cout << "\nMédia tempo total: " << tempo_total * exec_max << endl;
 
