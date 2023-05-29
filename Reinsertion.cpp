@@ -17,8 +17,6 @@ class Reinsertion
         void run(Solution &s)
         {
                 int deltaCusto;
-                int best_caso = 0;
-                std::vector<int> vec_aux = {0, 0};
                 int bestDeltaCusto = 0;
                 int best_l1 = 0;
                 int best_l2 = 0;
@@ -35,8 +33,7 @@ class Reinsertion
                         {
                             for (int j = 0; j <= s.linhas_producao[l2].produtos.size(); j++)
                                 {
-                                    vec_aux = costReinsertion(s, l1, l2, i, j);
-                                    deltaCusto = vec_aux[1];
+                                    deltaCusto = costReinsertion(s, l1, l2, i, j);
 
                                     if (deltaCusto < bestDeltaCusto)
                                     {
@@ -45,7 +42,6 @@ class Reinsertion
                                         best_l2 = l2;
                                         best_i = i;
                                         best_j = j;
-                                        best_caso = vec_aux[0];
                                     }
                             }
                         }
@@ -80,7 +76,7 @@ class Reinsertion
 
         
 
-        std::vector<int> costReinsertion(const Solution &s, int l1, int l2, int i, int j)
+        int costReinsertion(const Solution &s, int l1, int l2, int i, int j)
         {
             int deltaCusto = 0;
             int caso = 0;
@@ -215,6 +211,6 @@ class Reinsertion
                 caso = 9;
             }
         
-            return {caso, deltaCusto};
+            return deltaCusto;
         }
 };

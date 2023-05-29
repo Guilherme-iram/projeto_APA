@@ -11,6 +11,7 @@
 #include "SwapInter.cpp"
 #include "Reinsertion.cpp"
 #include "Perturbacao.cpp"
+#include "shift.cpp"
 
 using namespace std;
 
@@ -26,41 +27,28 @@ int main()
     auto start = std::chrono::high_resolution_clock::now();
 
     Solution solution1, solution2;
-    Algoritmo algoritmo;
-    vector<int> custos_1;
-    vector<int> custos_2;
+    Algoritmo algoritmo(0.5);
+    
+    Shiftline shift = Shiftline(instancia);
 
-    for (int i = 0; i < 1000; i++) 
-    {
-        solution1 = algoritmo.construcao(instancia);
-        solution2 = algoritmo.construcao(instancia);
-        custos_1.push_back(solution1.custo_total);
-        custos_2.push_back(solution2.custo_total);
+    solution1 = algoritmo.construcao(instancia);
+    solution1.print_solution();
+    shift.run(solution1);
+    cout << "\n";
+    
+    solution1.print_solution();
+    cout << '\n';
+    
+    // print todos os custos das linhas de producao 
+    
+    for (int i = 0; i < solution1.linhas_producao.size(); i++){
+        cout << "Linha " << i + 1 << " : "<< solution1.linhas_producao[i].custo << endl;
+
     }
     
-    auto stop = std::chrono::high_resolution_clock::now();
-
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-
-    double media_custos_1 = 0;
-    double media_custos_2 = 0;
-
-    for (int i = 0; i < custos_1.size(); i++)
-    {
-        media_custos_1 += custos_1[i];
-        media_custos_2 += custos_2[i];
-    }
-
-    media_custos_1 /= custos_1.size();
-    media_custos_2 /= custos_2.size();
-
+    solution1.calcula_custo_total();
     solution1.print_solution();
-    cout << "media custos 1: " << media_custos_1 << endl;
-    cout << "---" << endl;
-    solution2.print_solution();
-    cout << "media custos 2: " << media_custos_2 << endl;
 
-    cout << "Tempo de execucao: " << duration.count() << " microsegundos" << endl;
 
     return 0;
     

@@ -19,7 +19,6 @@ class Swapline
         void run(Solution& s)
         {
             int deltaCusto = 0;
-            std::vector<int> vec_aux = {0, 0};
             int bestDeltaCusto = 0;
             
             int greater_n_l = 0;
@@ -46,9 +45,8 @@ class Swapline
             {
                 for (int j = i + 1; j < s.linhas_producao[greater_n_l].produtos.size(); j++)
                 {
-                    vec_aux = costSwap(s, greater_n_l, i, j);
-                    deltaCusto = vec_aux[1];
-
+                    deltaCusto  = costSwap(s, greater_n_l, i, j);
+                    
                     if (deltaCusto < bestDeltaCusto)
                     {
                         bestDeltaCusto = deltaCusto;
@@ -74,11 +72,12 @@ class Swapline
             s.linhas_producao[n_l].produtos[j] = aux;
         };
 
-        std::vector<int> costSwap(const Solution& s, int n_l, int i, int j)
+        int costSwap(const Solution& s, int n_l, int i, int j)
         {
             int deltaCusto = 0;
             int caso = 0;
             int size_p = s.linhas_producao[n_l].produtos.size();
+
             if (i == 0 && j == size_p - 1)
             {
                 // std::std::cout << "CASO 1" << std::std::endl;
@@ -86,7 +85,7 @@ class Swapline
                 {
                     deltaCusto = - instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i] - 1][s.linhas_producao[n_l].produtos[j] - 1]
                                  + instancia.tempo_preparo[s.linhas_producao[n_l].produtos[j] - 1][s.linhas_producao[n_l].produtos[i] - 1];
-                    return {caso, deltaCusto};
+                    return deltaCusto;
                 }
 
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[n_l].produtos[i] - 1][s.linhas_producao[n_l].produtos[i + 1] - 1];
@@ -170,6 +169,6 @@ class Swapline
                 caso = -1;
             }
 
-            return {caso, deltaCusto};
+            return deltaCusto;
         }
 };

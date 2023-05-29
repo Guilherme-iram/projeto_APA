@@ -17,8 +17,6 @@ public:
     void run(Solution &s)
     {
             int deltaCusto;
-            int best_caso = 0;
-            std::vector<int> vec_aux = {0, 0};
             int bestDeltaCusto = 0;
             int best_l1 = 0;
             int best_l2 = 0;
@@ -33,8 +31,7 @@ public:
                     {
                         for (int j = 0; j < s.linhas_producao[l2].produtos.size(); j++)
                             {
-                                vec_aux = costInterSwap(s, l1, l2, i, j);
-                                deltaCusto = vec_aux[1];
+                                deltaCusto = costInterSwap(s, l1, l2, i, j);
 
                                 if (deltaCusto < bestDeltaCusto)
                                 {
@@ -43,7 +40,6 @@ public:
                                     best_l2 = l2;
                                     best_i = i;
                                     best_j = j;
-                                    best_caso = vec_aux[0];
                                 }
                         }
                     }
@@ -64,7 +60,7 @@ public:
         s.linhas_producao[l2].produtos[j] = aux;
     };
 
-    std::vector<int> costInterSwap(const Solution &s, int l1, int l2, int i, int j)
+    int costInterSwap(const Solution &s, int l1, int l2, int i, int j)
     {
         int deltaCusto = 0;
         int caso = 0;
@@ -102,7 +98,7 @@ public:
                 // std::cout << "Custo = " << deltaCusto << std::endl;
 
                 caso = 3;
-                return {caso, deltaCusto};
+                return deltaCusto;
             }
             deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i] - 1][s.linhas_producao[l1].produtos[i + 1] - 1];
             deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l2].produtos[j - 1] - 1][s.linhas_producao[l2].produtos[j] - 1];
@@ -222,6 +218,6 @@ public:
             caso = 9;
         }
 
-        return {caso, deltaCusto};
+        return deltaCusto;
     }
 };

@@ -13,6 +13,7 @@
 #include "SwapInter.cpp"
 #include "Swapline.cpp"
 #include "Reinsertion.cpp"
+#include "Shift.cpp"
 #include "Perturbacao.cpp"
 #include "VND.cpp"
 #include "csv.cpp"
@@ -58,9 +59,9 @@ int main()
     vector<double> medias_VND_tempos;
     vector<double> medias_custos_tempos;
 
-    int Multi_Start_max_iter = 32;
-    int ILS_max_iter = 8;
-    double alpha = 0.5;
+    int Multi_Start_max_iter = 1024;
+    int ILS_max_iter = 16;
+    double alpha = 0.9;
     int exec_max = 1;
 
     // Nao ta pegando as 2 ultimas instancias grandes aqui pra agilizar os testes
@@ -94,6 +95,8 @@ int main()
             SwapInter swinter = SwapInter(instancia);
             Swapline swapline = Swapline(instancia);
             Reinsertion reinsertion = Reinsertion(instancia);
+            Shiftline shiftline = Shiftline(instancia);
+
             Pertubacao_double_swap pertubacao = Pertubacao_double_swap(instancia);
 
             auto start_construcao = std::chrono::high_resolution_clock::now();
@@ -112,7 +115,7 @@ int main()
             best_solution = Solution(solution);
 
             auto start_vnd = std::chrono::high_resolution_clock::now();
-            buscaLocal(best_solution, swintra, swinter, reinsertion, swapline);
+            buscaLocal(best_solution, swintra, swinter, reinsertion, swapline, shiftline);
             auto end_vnd = std::chrono::high_resolution_clock::now();
 
             custos_vnd.push_back(best_solution.custo_total);
@@ -121,12 +124,12 @@ int main()
             for (int i = 0; i < Multi_Start_max_iter; i++){
 
                 solution = algoritmo.construcao(instancia);
-                buscaLocal(solution, swintra, swinter, reinsertion, swapline);
+                buscaLocal(solution, swintra, swinter, reinsertion, swapline, shiftline);
 
                 for (int j = 0; j < ILS_max_iter; j++)
                 {
                     pertubacao.run(solution);
-                    buscaLocal(solution, swintra, swinter, reinsertion, swapline);
+                    buscaLocal(solution, swintra, swinter, reinsertion, swapline, shiftline);
 
                     if (solution.custo_total < best_solution.custo_total)
                     {
@@ -139,16 +142,15 @@ int main()
                         cout << "------------------" << endl;
 
                         j = 0;
-                        i = 0;
                     }
 
 
                 }
 
-                // if (i % 100 == 0)
-                // {
-                cout << "Iteracao GRASP: " << i << endl;
-                // }
+                if (i % 100 == 0)
+                {
+                    cout << "Iteracao GRASP: " << i << endl;
+                }
             }
 
             auto end_ils = std::chrono::high_resolution_clock::now();
@@ -239,27 +241,27 @@ int main()
     vector<string> registro_VND_tempo = {};
     vector<string> registro_construcao_tempo = {};
 
-    registro_custo.push_back(std::to_string(exec_max));
+    registro_custo.push_back(std::to_string(alpha));
     registro_custo.push_back(std::to_string(Multi_Start_max_iter));
     registro_custo.push_back(std::to_string(ILS_max_iter));
 
-    registro_construcao.push_back(std::to_string(exec_max));
+    registro_construcao.push_back(std::to_string(alpha));
     registro_construcao.push_back(std::to_string(Multi_Start_max_iter));
     registro_construcao.push_back(std::to_string(ILS_max_iter));
 
-    registro_VND.push_back(std::to_string(exec_max));
+    registro_VND.push_back(std::to_string(alpha));
     registro_VND.push_back(std::to_string(Multi_Start_max_iter));
     registro_VND.push_back(std::to_string(ILS_max_iter));
 
-    registro_custo_tempo.push_back(std::to_string(exec_max));
+    registro_custo_tempo.push_back(std::to_string(alpha));
     registro_custo_tempo.push_back(std::to_string(Multi_Start_max_iter));
     registro_custo_tempo.push_back(std::to_string(ILS_max_iter));
 
-    registro_construcao_tempo.push_back(std::to_string(exec_max));
+    registro_construcao_tempo.push_back(std::to_string(alpha));
     registro_construcao_tempo.push_back(std::to_string(Multi_Start_max_iter));
     registro_construcao_tempo.push_back(std::to_string(ILS_max_iter));
 
-    registro_VND_tempo.push_back(std::to_string(exec_max));
+    registro_VND_tempo.push_back(std::to_string(alpha));
     registro_VND_tempo.push_back(std::to_string(Multi_Start_max_iter));
     registro_VND_tempo.push_back(std::to_string(ILS_max_iter));
 
