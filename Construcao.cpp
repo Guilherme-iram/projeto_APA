@@ -84,7 +84,6 @@ class Algoritmo
                 // obter o melhor candidato a partir dos candidatos selecionados
                 Insersao melhor_candidato = candidatos_selecionados[0];
                 
-
                 linhas_de_producao[melhor_candidato.linha].produtos.insert(linhas_de_producao[melhor_candidato.linha].produtos.begin() + melhor_candidato.posicao, produtos_id[i]);
             
             }

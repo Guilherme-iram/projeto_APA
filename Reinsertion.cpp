@@ -74,7 +74,6 @@ class Reinsertion
 
         };
 
-        
 
         int costReinsertion(const Solution &s, int l1, int l2, int i, int j)
         {
@@ -86,38 +85,27 @@ class Reinsertion
 
             if (i == 0 && j == 0)
             {
-                // std::cout << "CASO 1" << std::endl;
-
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i] - 1][s.linhas_producao[l1].produtos[i + 1] - 1];
 
                 deltaCusto += instancia.tempo_preparo[s.linhas_producao[l1].produtos[i] - 1][s.linhas_producao[l2].produtos[j] - 1];
 
-                // // std::cout << "Custo = " << deltaCusto << std::endl;
                 caso = 1;
             }
 
             else if (i == 0 && j <= size_j - 1)
             {
-
-                // std::cout << "CASO 2" << std::endl;
-
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i] - 1][s.linhas_producao[l1].produtos[i + 1] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l2].produtos[j - 1] - 1][s.linhas_producao[l2].produtos[j] - 1];
-
 
                 deltaCusto += instancia.tempo_preparo[s.linhas_producao[l2].produtos[j - 1] - 1][s.linhas_producao[l1].produtos[i] - 1];
                 deltaCusto += instancia.tempo_preparo[s.linhas_producao[l1].produtos[i] - 1][s.linhas_producao[l2].produtos[j] - 1];
 
-                // // std::cout << "Custo = " << deltaCusto << std::endl;
                 caso = 2;
-
             }
 
 
             else if (i == size_i - 1 && j == 0)
             {
-                // std::cout << "CASO 3" << std::endl;
-
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i - 1] - 1][s.linhas_producao[l1].produtos[i] - 1];
 
                 deltaCusto += instancia.tempo_preparo[s.linhas_producao[l1].produtos[i] - 1][s.linhas_producao[l2].produtos[j] - 1];
@@ -127,8 +115,6 @@ class Reinsertion
 
             else if (i == size_i - 1 && j <= size_j - 1)
             {
-                // std::cout << "CASO 4" << std::endl;
-
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i - 1] - 1][s.linhas_producao[l1].produtos[i] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l2].produtos[j - 1] - 1][s.linhas_producao[l2].produtos[j] - 1];
                 
@@ -141,8 +127,6 @@ class Reinsertion
 
             else if (i < size_i - 1 && j == 0)
             {
-                // std::cout << "Caso 5" << std::endl;
-
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i - 1] - 1][s.linhas_producao[l1].produtos[i] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i] - 1][s.linhas_producao[l1].produtos[i + 1] - 1];
 
@@ -154,52 +138,36 @@ class Reinsertion
 
             else if (i == 0 && j == size_j)
             {
-
-                // std::cout << "CASO 6" << std::endl;
-
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i] - 1][s.linhas_producao[l1].produtos[i + 1] - 1];
 
                 deltaCusto += instancia.tempo_preparo[s.linhas_producao[l2].produtos[j - 1] - 1][s.linhas_producao[l1].produtos[i] - 1];
 
-                // // std::cout << "Custo = " << deltaCusto << std::endl;
                 caso = 6;
             }
             
             else if (i == size_i -1 && j == size_j)
             {
-
-                // std::cout << "CASO 7" << std::endl;
-                
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i - 1] - 1][s.linhas_producao[l1].produtos[i] - 1];
 
                 deltaCusto += instancia.tempo_preparo[s.linhas_producao[l2].produtos[j - 1] - 1][s.linhas_producao[l1].produtos[i] - 1];
 
-                // // std::cout << "Custo = " << deltaCusto << std::endl;
                 caso = 7;
-
             }
 
             else if (i >= 1 && j == size_j)
             {
 
-                // std::cout << "CASO 8" << std::endl;
-                
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i - 1] - 1][s.linhas_producao[l1].produtos[i] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i] - 1][s.linhas_producao[l1].produtos[i + 1] - 1];
 
                 deltaCusto += instancia.tempo_preparo[s.linhas_producao[l2].produtos[j - 1] - 1][s.linhas_producao[l1].produtos[i] - 1];
                 deltaCusto += instancia.tempo_preparo[s.linhas_producao[l1].produtos[i - 1] - 1][s.linhas_producao[l1].produtos[i + 1] - 1];
 
-
-                // // std::cout << "Custo = " << deltaCusto << std::endl;
                 caso = 8;
-
             }
 
             else if (i < size_i - 1 && j <= size_j - 1)
             {
-                // std::cout << "Caso 9" << std::endl;
-
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i - 1] - 1][s.linhas_producao[l1].produtos[i] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l1].produtos[i] - 1][s.linhas_producao[l1].produtos[i + 1] - 1];
                 deltaCusto -= instancia.tempo_preparo[s.linhas_producao[l2].produtos[j - 1] - 1][s.linhas_producao[l2].produtos[j] - 1];

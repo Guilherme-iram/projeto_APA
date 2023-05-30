@@ -18,9 +18,7 @@ Solution::Solution(const Solution& s){
 }
 
 Solution::Solution(){
-
 }
-
 
 void Solution::custo_linhas(){
     
@@ -58,7 +56,6 @@ void Solution::calcula_custo_total(){
     this->custo_total = custo_maximo;
 
 } 
-
 
 void Solution::print_solution(){
 

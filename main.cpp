@@ -59,9 +59,9 @@ int main()
     vector<double> medias_VND_tempos;
     vector<double> medias_custos_tempos;
 
-    int Multi_Start_max_iter = 1024;
-    int ILS_max_iter = 16;
-    double alpha = 0.9;
+    int GRASP_max_iter = 600;
+    int ILS_max_iter = 300;
+    double alpha = 0.80;
     int exec_max = 1;
 
     // Nao ta pegando as 2 ultimas instancias grandes aqui pra agilizar os testes
@@ -84,7 +84,6 @@ int main()
             // string caminho_arquivo = "/home/mikenew/projeto_APA/instancias/" + instances_name[inst];
             
             Instancia instancia = leitor_de_instancias(caminho_arquivo);
-
             auto start_ils = std::chrono::high_resolution_clock::now();
 
             Solution solution;
@@ -121,7 +120,7 @@ int main()
             custos_vnd.push_back(best_solution.custo_total);
             tempos_vnd.push_back((end_vnd - start_vnd).count());
 
-            for (int i = 0; i < Multi_Start_max_iter; i++){
+            for (int i = 0; i < GRASP_max_iter; i++){
 
                 solution = algoritmo.construcao(instancia);
                 buscaLocal(solution, swintra, swinter, reinsertion, swapline, shiftline);
@@ -242,27 +241,27 @@ int main()
     vector<string> registro_construcao_tempo = {};
 
     registro_custo.push_back(std::to_string(alpha));
-    registro_custo.push_back(std::to_string(Multi_Start_max_iter));
+    registro_custo.push_back(std::to_string(GRASP_max_iter));
     registro_custo.push_back(std::to_string(ILS_max_iter));
 
     registro_construcao.push_back(std::to_string(alpha));
-    registro_construcao.push_back(std::to_string(Multi_Start_max_iter));
+    registro_construcao.push_back(std::to_string(GRASP_max_iter));
     registro_construcao.push_back(std::to_string(ILS_max_iter));
 
     registro_VND.push_back(std::to_string(alpha));
-    registro_VND.push_back(std::to_string(Multi_Start_max_iter));
+    registro_VND.push_back(std::to_string(GRASP_max_iter));
     registro_VND.push_back(std::to_string(ILS_max_iter));
 
     registro_custo_tempo.push_back(std::to_string(alpha));
-    registro_custo_tempo.push_back(std::to_string(Multi_Start_max_iter));
+    registro_custo_tempo.push_back(std::to_string(GRASP_max_iter));
     registro_custo_tempo.push_back(std::to_string(ILS_max_iter));
 
     registro_construcao_tempo.push_back(std::to_string(alpha));
-    registro_construcao_tempo.push_back(std::to_string(Multi_Start_max_iter));
+    registro_construcao_tempo.push_back(std::to_string(GRASP_max_iter));
     registro_construcao_tempo.push_back(std::to_string(ILS_max_iter));
 
     registro_VND_tempo.push_back(std::to_string(alpha));
-    registro_VND_tempo.push_back(std::to_string(Multi_Start_max_iter));
+    registro_VND_tempo.push_back(std::to_string(GRASP_max_iter));
     registro_VND_tempo.push_back(std::to_string(ILS_max_iter));
 
     for (int i = 0; i < medias_custos.size(); i++)

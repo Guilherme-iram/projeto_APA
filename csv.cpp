@@ -7,7 +7,6 @@
 void criarArquivoCSV(const std::string& nomeArquivo) {
     std::ofstream arquivo(nomeArquivo);
     if (arquivo.is_open()) {
-        // Escrever o cabeçalho das colunas
         arquivo << "alpha,Iter_GRASP,Iter_ILS,n10m2_A,n10m2_B,n15m3_A,n15m3_B,n15m4_A,n15m4_B,n29m4_A,n29m4_B,n29m6_A,n29m6_B,n40m5_A,n40m5_B,n52m5_A,n52m5_B,n450m16_A,n500m10_A\n";
         arquivo.close();
         std::cout << "Arquivo CSV criado com sucesso.\n";
@@ -17,9 +16,13 @@ void criarArquivoCSV(const std::string& nomeArquivo) {
 }
 
 void carregarCSV(const std::string& nomeArquivo) {
+
     std::ifstream arquivo(nomeArquivo);
+
     if (arquivo.is_open()) {
+
         std::string linha;
+
         while (std::getline(arquivo, linha)) {
             std::istringstream iss(linha);
             std::string valor;
@@ -28,7 +31,6 @@ void carregarCSV(const std::string& nomeArquivo) {
                 valores.push_back(valor);
             }
             
-            // Processar os valores (exemplo: imprimir)
             for (const auto& v : valores) {
                 std::cout << v << " ";
             }

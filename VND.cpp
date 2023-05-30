@@ -5,7 +5,12 @@
 #include "Reinsertion.cpp"
 #include "Shift.cpp"
 
-void buscaLocal(Solution& s, SwapIntra& swintra, SwapInter& swinter, Reinsertion& reinsertion, Swapline& swapline, Shiftline& shiftline)
+void buscaLocal(Solution& s,
+                SwapIntra& swintra,
+                SwapInter& swinter,
+                Reinsertion& reinsertion,
+                Swapline& swapline,
+                Shiftline& shiftline)
 {
     int k = 1;
     
