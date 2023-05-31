@@ -67,9 +67,12 @@ class Shiftline
         void movement(Solution& s, int n_l, int i, int size)
         {
             std::vector<int> aux(s.linhas_producao[n_l].produtos.begin() + i, s.linhas_producao[n_l].produtos.begin() + i + size);
-            int dest_index = (i < i + size) ? s.linhas_producao[n_l].produtos.size() - size : 0;
+            int dest_index = s.linhas_producao[n_l].produtos.size() - size;
 
+            // Copia do i + size até o final do array para o inicio do array + i 
             std::copy(s.linhas_producao[n_l].produtos.begin() + i + size, s.linhas_producao[n_l].produtos.end(), s.linhas_producao[n_l].produtos.begin() + i);
+            
+            // Copia do aux para o final do array, finalizando o shift do bloco size para o final do array
             std::copy(aux.begin(), aux.end(), s.linhas_producao[n_l].produtos.begin() + dest_index);
         }
 

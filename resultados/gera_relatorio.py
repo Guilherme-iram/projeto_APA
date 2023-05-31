@@ -7,7 +7,7 @@ from reportlab.lib import utils
 integrantes = [
     "Guilherme Iram",
     "Guilherme Pujoni",
-    "Miqueias Luiz",
+    "Miqueias Luis",
 ]
 
 # Caminhos das imagens

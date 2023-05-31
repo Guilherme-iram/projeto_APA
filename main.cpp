@@ -59,9 +59,9 @@ int main()
     vector<double> medias_VND_tempos;
     vector<double> medias_custos_tempos;
 
-    int GRASP_max_iter = 600;
-    int ILS_max_iter = 300;
-    double alpha = 0.85;
+    int GRASP_max_iter = 10;
+    int ILS_max_iter = 1000;
+    double alpha = 0.9;
     int exec_max = 1;
 
     // Nao ta pegando as 2 ultimas instancias grandes aqui pra agilizar os testes
